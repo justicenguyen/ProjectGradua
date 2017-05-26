@@ -1,0 +1,9 @@
+c:\users\justice\documents\visual studio 2017\Projects\ElectricShop\ElectricShop\bin\Debug\netcoreapp1.1\ElectricShop.deps.json
+c:\users\justice\documents\visual studio 2017\Projects\ElectricShop\ElectricShop\bin\Debug\netcoreapp1.1\ElectricShop.runtimeconfig.json
+c:\users\justice\documents\visual studio 2017\Projects\ElectricShop\ElectricShop\bin\Debug\netcoreapp1.1\ElectricShop.runtimeconfig.dev.json
+c:\users\justice\documents\visual studio 2017\Projects\ElectricShop\ElectricShop\bin\Debug\netcoreapp1.1\ElectricShop.dll
+c:\users\justice\documents\visual studio 2017\Projects\ElectricShop\ElectricShop\obj\Debug\netcoreapp1.1\ElectricShop.csprojResolveAssemblyReference.cache
+c:\users\justice\documents\visual studio 2017\Projects\ElectricShop\ElectricShop\obj\Debug\netcoreapp1.1\ElectricShop.AssemblyInfo.cs
+c:\users\justice\documents\visual studio 2017\Projects\ElectricShop\ElectricShop\bin\Debug\netcoreapp1.1\ElectricShop.pdb
+c:\users\justice\documents\visual studio 2017\Projects\ElectricShop\ElectricShop\obj\Debug\netcoreapp1.1\ElectricShop.dll
+c:\users\justice\documents\visual studio 2017\Projects\ElectricShop\ElectricShop\obj\Debug\netcoreapp1.1\ElectricShop.pdb

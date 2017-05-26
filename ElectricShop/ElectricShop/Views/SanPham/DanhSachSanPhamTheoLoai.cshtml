@@ -1,0 +1,114 @@
+﻿@model ElectricShop.Models.DuLieuDanhSachSanPhamTheoLoai
+@{
+    ViewData["Title"] = Model.loaisanpham.TenLoaiSPCoDau;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h4>@Model.loaisanpham.TenLoaiSPCoDau</h4>
+<div>
+    <form asp-controller="SanPham" asp-action="DanhSachSanPhamTheoLoai" method="get">
+        
+        <hr />
+        <span style="font-size:18px;">Hãng sản xuất</span>:&emsp;&emsp;
+        @foreach (var nsx in Model.dsnhasanxuat)
+        {
+            if (ViewData["hang"].Equals(nsx.TenNSXKhongDau))
+            {
+                @: <input type="radio" name="hang" value="@nsx.TenNSXKhongDau" onclick="this.form.submit();" checked="checked" /> @nsx.TenNSXCoDau &emsp;
+            }
+            else
+            {
+                @: <input type="radio" name="hang" value="@nsx.TenNSXKhongDau" onclick="this.form.submit();"/> @nsx.TenNSXCoDau &emsp;
+            }
+           
+        }
+        <hr />
+        <span style="font-size:18px;">Giá bán:</span>&emsp;&emsp;
+        @{
+            if (ViewData["gia"].Equals("duoi-5-trieu"))
+            {
+               @:<input name="gia" type="radio" value="duoi-5-trieu" checked="checked" onclick="this.form.submit();" /> Dưới 5 triệu &emsp;
+            }
+            else
+            {
+                @:<input name="gia" type="radio" value="duoi-5-trieu" onclick="this.form.submit();"/> Dưới 5 triệu &emsp;
+            }
+        }
+        @{
+            if (ViewData["gia"].Equals("tu-5-7-trieu"))
+            {
+                @:<input name="gia" type="radio" value="tu-5-7-trieu" checked="checked" onclick="this.form.submit();"/> Từ 5 - 7 triệu&emsp;
+            }
+            else
+            {
+                @:<input name="gia" type="radio" value="tu-5-7-trieu" onclick="this.form.submit();" /> Từ 5 - 7 triệu&emsp;
+            }
+        }
+        @{
+            if (ViewData["gia"].Equals("tu-7-10-trieu"))
+            {
+                @:<input name="gia" type="radio" value="tu-7-10-trieu" checked="checked" onclick="this.form.submit();" /> Từ 7 - 10 triệu&emsp;
+            }
+            else
+            {
+                @:<input name="gia" type="radio" value="tu-7-10-trieu" onclick="this.form.submit();" /> Từ 7 - 10 triệu&emsp;
+            }
+        }
+        @{
+            if (ViewData["gia"].Equals("tren-10-trieu"))
+            {
+                @:<input name="gia" type="radio" value="ttren-10-trieu" checked="checked" onclick="this.form.submit();"/> Trên 10 triệu&emsp;
+            }
+            else
+            {
+                @:<input name="gia" type="radio" value="tren-10-trieu" onclick="this.form.submit();"/> Trên 10 triệu&emsp;
+            }
+        }
+    </form>
+</div>
+<hr />
+<ul class="thumbnails">
+    @foreach (var spht in Model.dssanphamtheoloai)
+    {
+        @*<li class="span3">
+            <div class="thumbnail">
+                <a asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@spht.TenSPKhongDau"><img src="~/@spht.HinhAnh" alt="" /></a>
+                <div class="caption">
+                    <h5 style="color:red;text-align:center;">@spht.TenSPCoDau</h5>
+                    <p>
+                        <h5>@spht.Gia đồng</h5>
+                    </p>
+
+                    <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> </h4>
+                </div>
+            </div>
+        </li>*@
+
+
+
+        <li class="span3">
+            <div class="thumbnail">
+                <a asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@spht.TenSPKhongDau"><img src="~/@spht.HinhAnh" alt="" /></a>
+                <div class="caption">
+                    <h5 style="color:blue;text-align:center;">@spht.TenSPCoDau</h5>
+                    <p>
+                        <h4 style="color:red;text-align:center;">@Html.DisplayFor(modelItem => spht.GiaGiam) vnđ</h4>
+                    </p>
+                    <p>
+                        @{
+                            if (!(spht.Gia == spht.GiaGiam))
+                            {
+                                <h5> <span style="text-decoration:line-through" class="giagoc"> @Html.DisplayFor(modelItem => spht.Gia) vnđ  </span> &nbsp;<span style="background-color:red;color:white;">-@(100 - spht.GiaGiam * 100 / spht.Gia)%</span></h5>
+                            }
+                        }
+                    </p>
+
+                    <h4 style="text-align:center"><a class="btn" asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@spht.TenSPKhongDau"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> </h4>
+                </div>
+            </div>
+        </li>
+
+
+                            }
+</ul>

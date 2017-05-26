@@ -1,0 +1,42 @@
+﻿@model ElectricShop.Models.DuLieuDanhSachSanPhamTheoLoai
+@{
+    ViewData["Title"] = Model.loaisanpham.TenLoaiSPCoDau;
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h1>vvAA @ViewData["aaa"]AAvv</h1>
+<h4>@Model.loaisanpham.TenLoaiSPCoDau</h4>
+<div>
+    <form asp-controller="SanPham" asp-action="DanhSachSanPhamTheoLoaiCoDieuKien" method="get">
+        @{ int flag = 0;}
+        @foreach (var nsx in Model.dsnhasanxuat)
+        {
+            if (flag == 0)
+            {
+                @:<input type="hidden" name="loaisp" value="@Model.loaisanpham.TenLoaiSPKhongDau" />
+                flag = 1;
+            }
+
+            @:<input name="hang" type="radio" value="@nsx.TenNSXKhongDau" onclick="this.form.submit();" /> @nsx.TenNSXCoDau &emsp;
+        }
+    </form>
+    <h1>@ViewData["hang"]</h1>
+</div>
+<ul class="thumbnails">
+    @foreach (var spht in Model.dssanphamtheoloai)
+    {
+        <li class="span3">
+            <div class="thumbnail">
+                <a asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@spht.TenSPKhongDau"><img src="~/@spht.HinhAnh" alt="" /></a>
+                <div class="caption">
+                    <h5 style="color:red;text-align:center;">@spht.TenSPCoDau</h5>
+                    <p>
+                        <h5>@spht.Gia đồng</h5>
+                    </p>
+
+                    <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> </h4>
+                </div>
+            </div>
+        </li>
+    }
+</ul>

@@ -1,0 +1,50 @@
+﻿@model ElectricShop.Models.DanhSachSanPhamTimKiem
+@{
+    ViewData["Title"] = "Ket qua tim kiem";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<h4>Các sản phẩm tìm kiếm cho từ khoa " @Model.tukhoa " </h4>
+
+<ul class="thumbnails">
+    @foreach (var spht in Model.dssanphamtimkiem)
+    {
+        @*<li class="span3">
+                <div class="thumbnail">
+                    <a asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@spht.TenSPKhongDau"><img src="~/@spht.HinhAnh" alt="" /></a>
+                    <div class="caption">
+                        <h5 style="color:red;text-align:center;">@spht.TenSPCoDau</h5>
+                        <p>
+                            <h5>@spht.Gia đồng</h5>
+                        </p>
+
+                        <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> </h4>
+                    </div>
+                </div>
+            </li>*@
+
+
+        <li class="span3">
+            <div class="thumbnail">
+                <a asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@spht.TenSPKhongDau"><img src="~/@spht.HinhAnh" alt="" /></a>
+                <div class="caption">
+                    <h5 style="color:blue;text-align:center;">@spht.TenSPCoDau</h5>
+                    <p>
+                        <h4 style="color:red;text-align:center;">@Html.DisplayFor(modelItem => spht.GiaGiam) vnđ</h4>
+                    </p>
+                    <p>
+                        @{
+                            if (!(spht.Gia == spht.GiaGiam))
+                            {
+                                <h5> <span style="text-decoration:line-through;" class="giagoc"> @Html.DisplayFor(modelItem => spht.Gia) vnđ  </span> &nbsp;<span style="background-color:red;color:white;">-@(100 - spht.GiaGiam * 100 / spht.Gia)%</span></h5>
+                            }
+                        }
+                    </p>
+
+                    <h4 style="text-align:center"><a class="btn" asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@spht.TenSPKhongDau"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> </h4>
+                </div>
+            </div>
+        </li>
+     }
+</ul>
