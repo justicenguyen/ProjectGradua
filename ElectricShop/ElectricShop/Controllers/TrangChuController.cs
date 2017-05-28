@@ -16,16 +16,20 @@ namespace ElectricShop.Controllers
         {
             _context = context;
         }
+        public IActionResult VD()
+        {
+            return View();
+        }
         public async Task<IActionResult> TrangChu()
         {
             Microsoft.AspNetCore.Http.CookieOptions options = new Microsoft.AspNetCore.Http.CookieOptions();
             options.Expires = DateTime.Now.AddSeconds(30);
            
             var dssanphamhienthi = from spht in _context.SanPham
-                                   where spht.HienThi == 1
+                                   where spht.HienThi == true
                                    select spht;
             var dssanphambanchay = from spbc in _context.SanPham
-                                   where spbc.SanPhamBanChay==1
+                                   where spbc.SanPhamBanChay==true
                                    select spbc;
             var dssanphammoinhat = (from spmn in _context.SanPham
                                     orderby spmn.NgayTao

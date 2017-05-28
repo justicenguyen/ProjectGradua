@@ -47,13 +47,13 @@ namespace ElectricShop.Migrations
 
                     b.Property<int>("DonHangID");
 
-                    b.Property<int>("Gia");
+                    b.Property<int?>("Gia");
 
                     b.Property<int>("SanPhamID");
 
-                    b.Property<int>("SoLuong");
+                    b.Property<int?>("SoLuong");
 
-                    b.Property<int>("TongTien");
+                    b.Property<int?>("TongTien");
 
                     b.HasKey("ID");
 
@@ -73,7 +73,7 @@ namespace ElectricShop.Migrations
 
                     b.Property<string>("TenKhachHang");
 
-                    b.Property<int>("TongTien");
+                    b.Property<int?>("TongTien");
 
                     b.HasKey("ID");
 
@@ -160,7 +160,7 @@ namespace ElectricShop.Migrations
 
                     b.Property<string>("HeDeHanh");
 
-                    b.Property<int>("HienThi");
+                    b.Property<bool>("HienThi");
 
                     b.Property<string>("HinhAnh")
                         .IsRequired();
@@ -187,7 +187,7 @@ namespace ElectricShop.Migrations
 
                     b.Property<int>("NhaSanXuat");
 
-                    b.Property<int>("SanPhamBanChay");
+                    b.Property<bool>("SanPhamBanChay");
 
                     b.Property<string>("SmartTV");
 

@@ -1,41 +1,40 @@
-@model IEnumerable<ElectricShop.Models.LoaiSanPham>
+﻿@model IEnumerable<ElectricShop.Models.LoaiSanPham>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Loại sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<a class="btn btn-success btn-xs" asp-action="Create"><i class="fa fa-plus-circle"></i> Thêm mới</a>
+<div class="row">
+    <div class="col-sm-7">
+        <table class="table table-striped jambo_table bulk_action">
+            <thead>
+                <tr class="headings">
 
-<h2>Index</h2>
+                    <th width="10%">ID </th>
+                    <th width="35%">Tên loại sản phẩm có dấu </th>
+                    <th width="35%">Tên loại sản phẩm không dấu </th>
+                    <th width="10%"> Sửa</th>
+                    <th width="10%"> Xóa</th>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TenLoaiSPCoDau)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TenLoaiSPKhongDau)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenLoaiSPCoDau)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenLoaiSPKhongDau)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var lsp in Model)
+            {
+                    <tr class="even pointer">
+                        <td class=" ">@lsp.ID</td>
+                        <td class=" ">@lsp.TenLoaiSPCoDau</td>
+                        <td class=" ">@lsp.TenLoaiSPKhongDau</td>
+                        <td class=""><a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@lsp.ID"><i class="fa fa-edit"></i>Sửa</a></td>
+                        <td class=""><a class="btn btn-danger btn-xs" asp-action="Delete" onclick="return confirm('Bạn có chắc chắn xóa không ?')" asp-route-id="@lsp.ID"><i class="fa fa-trash-o"></i> Xóa</a></td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+

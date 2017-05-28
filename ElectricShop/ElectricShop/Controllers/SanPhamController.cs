@@ -6,16 +6,22 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using ElectricShop.Models;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.Net.Http.Headers;
+using System.IO;
 
 namespace ElectricShop.Controllers
 {
     public class SanPhamController : Controller
     {
         private readonly ElectricShopContext _context;
+        private IHostingEnvironment hostingEnv;
 
-        public SanPhamController(ElectricShopContext context)
+        public SanPhamController(ElectricShopContext context, IHostingEnvironment env)
         {
-            _context = context;    
+            _context = context;
+            this.hostingEnv = env;
         }
         public IActionResult a()
         {
@@ -194,10 +200,29 @@ namespace ElectricShop.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ID,TenSPCoDau,TenSPKhongDau,LoaiSanPham,Gia,HinhAnh,MauSac,NhaSanXuat,XuatXu,BaoHanh,NgayTao,HienThi,SanPhamBanChay,SoLuong,KichThuocThung,KhoiLuongThung,KichThuocMH,DoPhanGiai,ManHinhCong,BoXuLy,SmartTV,TanSoQuet,CongSuatLoa,CongWiFi,CongInternet,CongHDMI,CongUSB,ChiaSeThongMinh,HeDeHanh,TrinhDuyetWeb,LoaiDanMay,LoaiDauDia")] SanPham sanPham)
+        public async Task<IActionResult> Create([Bind("ID,TenSPCoDau,TenSPKhongDau,LoaiSanPham," +
+            "Gia,GiaGiam,HinhAnh,MauSac,NhaSanXuat,XuatXu,BaoHanh,NgayTao,HienThi,SanPhamBanChay,SoLuong," +
+            "KichThuocThung,KhoiLuongThung,KichThuocMH,DoPhanGiai,MoTa,ManHinhCong,BoXuLy,SmartTV,TanSoQuet," +
+            "CongSuatLoa,CongWiFi,CongInternet,CongHDMI,CongUSB,ChiaSeThongMinh,HeDeHanh,TrinhDuyetWeb,LoaiDanMay,LoaiDauDia")] SanPham sanPham, IFormFile HinhAnh)
         {
             if (ModelState.IsValid)
             {
+                long size = 0;
+                string tenHinh = "";
+                var filename = ContentDispositionHeaderValue
+                                .Parse(HinhAnh.ContentDisposition)
+                                .FileName
+                                .Trim('"');
+                tenHinh = $@"images\sanpham\" + filename;
+                filename = hostingEnv.WebRootPath + $@"\images\sanpham\{filename}";
+                size += HinhAnh.Length;
+                using (FileStream fs = System.IO.File.Create(filename))
+                {
+                    HinhAnh.CopyTo(fs);
+                    fs.Flush();
+                }
+
+                sanPham.HinhAnh = tenHinh;
                 _context.Add(sanPham);
                 await _context.SaveChangesAsync();
                 return RedirectToAction("Index");

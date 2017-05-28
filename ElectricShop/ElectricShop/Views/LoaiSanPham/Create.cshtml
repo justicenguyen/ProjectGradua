@@ -1,42 +1,39 @@
-@model ElectricShop.Models.LoaiSanPham
+﻿@model ElectricShop.Models.LoaiSanPham
 
 @{
     ViewData["Title"] = "Create";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+<h1>Tạo mới loại sản phẩm</h1>
+<div class="row">
+    <div class="col-sm-6">
+        <form class="form-horizontal" asp-action="Create">
+            <div class="form-group">
+                <label class="control-label col-sm-4">Tên SP có dấu*</label>
+                <div class="col-sm-7">
+                    <input type="text" asp-for="TenLoaiSPCoDau" class="form-control" placeholder="Nhập tên sản phẩm có dấu">
+                    <span asp-validation-for="TenLoaiSPCoDau" class="text-danger"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-sm-4">Tên SP không dấu*</label>
+                <div class="col-sm-7">
+                    <input type="text" asp-for="TenLoaiSPKhongDau" class="form-control" placeholder="Nhập tên sản phẩm không dấu">
+                    <span asp-validation-for="TenLoaiSPKhongDau" class="text-danger"></span>
+                </div>
+            </div>
 
-<h2>Create</h2>
-
-<form asp-action="Create">
-    <div class="form-horizontal">
-        <h4>LoaiSanPham</h4>
-        <hr />
-        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-        <div class="form-group">
-            <label asp-for="TenLoaiSPCoDau" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="TenLoaiSPCoDau" class="form-control" />
-                <span asp-validation-for="TenLoaiSPCoDau" class="text-danger"></span>
+            <div class="form-group">
+                <div class="col-sm-offset-4 col-sm-7">
+                    <input type="submit" value="Tạo" class="btn btn-default" />
+                </div>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="TenLoaiSPKhongDau" class="col-md-2 control-label"></label>
-            <div class="col-md-10">
-                <input asp-for="TenLoaiSPKhongDau" class="form-control" />
-                <span asp-validation-for="TenLoaiSPKhongDau" class="text-danger"></span>
-            </div>
-        </div>
-        <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
-            </div>
-        </div>
+        </form>
     </div>
-</form>
-
-<div>
-    <a asp-action="Index">Back to List</a>
 </div>
 
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
+
+
+@*@section Scripts {
+        @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    }*@

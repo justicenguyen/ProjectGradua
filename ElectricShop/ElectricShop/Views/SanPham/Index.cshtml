@@ -1,7 +1,8 @@
-@model IEnumerable<ElectricShop.Models.SanPham>
+﻿@model IEnumerable<ElectricShop.Models.SanPham>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Sản phẩm";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
 <h2>Index</h2>
@@ -9,207 +10,61 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TenSPCoDau)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TenSPKhongDau)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LoaiSanPham)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.Gia)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HinhAnh)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.MauSac)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NhaSanXuat)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.XuatXu)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BaoHanh)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.NgayTao)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HienThi)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SanPhamBanChay)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SoLuong)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.KichThuocThung)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.KhoiLuongThung)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.KichThuocMH)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.DoPhanGiai)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ManHinhCong)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.BoXuLy)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.SmartTV)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TanSoQuet)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CongSuatLoa)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CongWiFi)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CongInternet)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CongHDMI)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.CongUSB)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.ChiaSeThongMinh)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.HeDeHanh)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TrinhDuyetWeb)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LoaiDanMay)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.LoaiDauDia)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenSPCoDau)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenSPKhongDau)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaiSanPham)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Gia)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HinhAnh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.MauSac)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NhaSanXuat)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.XuatXu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BaoHanh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.NgayTao)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HienThi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SanPhamBanChay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SoLuong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KichThuocThung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KhoiLuongThung)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.KichThuocMH)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DoPhanGiai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ManHinhCong)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.BoXuLy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.SmartTV)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TanSoQuet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CongSuatLoa)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CongWiFi)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CongInternet)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CongHDMI)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CongUSB)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ChiaSeThongMinh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.HeDeHanh)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TrinhDuyetWeb)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaiDanMay)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LoaiDauDia)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<div class="row">
+    <div class="col-md-12">
+        @foreach (var sp in Model)
+        {
+    <!--San pham-->
+            <div class="col-md-55" style="min-height:1px;">
+                <div class="thumbnail">
+                    <div class="image view view-first" style="min-height:1px;">
+                        <img style="width: 100%; display: block;" src="/@sp.HinhAnh" alt="image" />
+                    </div>
+                    <div class="caption">
+                        <h5><b>@sp.TenSPCoDau</b></h5>
+                        <p><b>Giá gốc : @sp.Gia vnd</b></p>
+                        <p><b>Giá KM : @sp.GiaGiam vnd </b></p>
+                        <p><b>Số lượng : @sp.SoLuong </b></p>
+                        <div class="checkbox">
+                            <label>
+                                @{ if (sp.HienThi == true)
+                                    {
+                                        @:<input type="checkbox" style="width:20px;height:20px;" class="flat" checked="checked"> <span style="margin-top:5px;"><b>&nbsp;Hiển thị trang chủ</b></span>
+                                    }
+                                    else
+                                    {
+                                       @: <input type="checkbox" style="width:20px;height:20px;" class="flat"> <span style="margin-top:5px;"><b>&nbsp;Hiển thị trang chủ</b></span>
+                                    }
+
+
+                                }
+                                </label>
+                        </div>
+                        <div class="checkbox">
+                            <label>
+                                @{ if (sp.SanPhamBanChay == true)
+                                    {
+                                        @:<input type="checkbox" style="width:20px;height:20px;" class="flat" checked="checked"> <span style="margin-top:5px;"><b>&nbsp;Sản phẩm bán chạy</b></span>
+                                    }
+                                    else
+                                    {
+                                        @: <input type="checkbox" style="width:20px;height:20px;" class="flat"> <span style="margin-top:5px;"><b>&nbsp;Sản phẩm bán chạy</b></span>
+                                    }
+                                    
+                                }
+                            </label>
+                        </div>
+                        <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Sửa </a>
+                        <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Xóa</a>
+                    </div>
+                </div>
+            </div>
+    <!--End San Pham-->
+        }
+    </div>
+</div>
+@*<div class="row">*@
+
+    
+    
+@*</div>*@
