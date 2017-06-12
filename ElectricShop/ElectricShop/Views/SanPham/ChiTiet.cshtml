@@ -50,9 +50,9 @@
             <div class="control-group">
                 <span style="color:red; font-size:20px;">Giá bán : @Html.DisplayFor(modelItem => Model.sanpham.GiaGiam) vnđ</span>
                 @{
-                    if ((Model.sanpham.GiaGiam != Model.sanpham.Gia))
+                    if ((Model.sanpham.GiaGiam != Model.sanpham.GiaGoc))
                     {
-                        @:<br /><br/><span style="font-size:15px; font-weight:bold;">Giá niêm yết :<span style="text-decoration:line-through"> @Html.DisplayFor(modelItem => Model.sanpham.Gia) vnđ</span>&nbsp;<span style="background-color:red;color:white;">-@(100 - Model.sanpham.GiaGiam * 100 / Model.sanpham.Gia)%</span></span>
+                        @:<br /><br/><span style="font-size:15px; font-weight:bold;">Giá niêm yết :<span style="text-decoration:line-through"> @Html.DisplayFor(modelItem => Model.sanpham.GiaGoc) vnđ</span>&nbsp;<span style="background-color:red;color:white;">-@(100 - Model.sanpham.GiaGiam * 100 / Model.sanpham.GiaGoc)%</span></span>
                     }
                 }
                 <div class="controls">
@@ -217,7 +217,7 @@
                                     <div class="caption">
                                         <h5>@splq.TenSPCoDau</h5>
                                       
-                                        <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">@splq.Gia</a></h4>
+                                        <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">@splq.GiaGoc</a></h4>
                                     </div>
                                 </div>
                             </li>

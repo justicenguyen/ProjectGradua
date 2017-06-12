@@ -18,6 +18,10 @@
 
     <!-- Custom styling plus plugins -->
     <link href="/frontend_admin/build/css/custom.min.css" rel="stylesheet">
+    <style>
+        @RenderSection("DonHang_CSS", false)
+    </style>
+    
 </head>
 
 <body class="nav-md">
@@ -50,10 +54,17 @@
                         <div class="menu_section">
                             <h3>Cửa hàng</h3>
                             <ul class="nav side-menu">
+                                
                                 <li><a asp-controller="LoaiSanPham" asp-action="Index"><i class="fa fa-plus-square-o"></i> Quản lý loại sản phẩm</a></li>
-
-                                <li><a asp-controller="LoaiSanPham" asp-action="Create"><i class="fa fa-laptop"></i> Quản lý sản phẩm</a></li>
-                                <li><a><i class="fa fa-home"></i> Quản lý nhà sản xuất</a></li>
+                                <li><a asp-controller="SanPham" asp-action="Index"><i class="fa fa-laptop"></i> Quản lý sản phẩm</a></li>
+                                <li><a asp-controller="NhaSanXuat" asp-action="Index"><i class="fa fa-home"></i> Quản lý nhà sản xuất</a></li>
+                                <li>
+                                    <a><i class="fa fa-gift"></i> Quản lý bán hàng<span class="fa fa-chevron-down"></span></a>
+                                    <ul class="nav child_menu">
+                                        <li><a asp-controller="SanPhamban" asp-action="BanHang">Bán hàng</a></li>
+                                        <li><a href="index2.html">Sản phẩm đã bán</a></li>
+                                    </ul>
+                                </li>
                                 <li>
                                     <a><i class="fa fa-gift"></i> Quản lý khuyến mãi<span class="fa fa-chevron-down"></span></a>
                                     <ul class="nav child_menu">
@@ -62,7 +73,7 @@
                                     </ul>
                                 </li>
                                 <li><a><i class="fa fa-archive"></i> Quản lý bảo hành</a></li>
-                                <li><a><i class="fa fa-truck"></i> Quản lý đơn đặt hàng<span class="badge bg-red">6</span></a></li>
+                                <li><a asp-controller="DonHang" asp-action="Index"><i class="fa fa-truck"></i> Quản lý đơn đặt hàng<span class="badge bg-red">6</span></a></li>
 
 
                             </ul>
@@ -207,7 +218,7 @@
             <div class="right_col" role="main">
                 <!-- ***********************dau*************************-->
                 
-
+                
                 @RenderBody()
                 <!--************************cuoi************************-->
             </div>
@@ -229,5 +240,7 @@
     <!-- Custom Theme Scripts -->
     <script src="/frontend_admin/build/js/custom.min.js"></script>
     @RenderSection("ckeditor",false)
+    @RenderSection("SanPhamIndex_Scripts",false)
+    @RenderSection("DonHang_Scripts",false)
 </body>
 </html>

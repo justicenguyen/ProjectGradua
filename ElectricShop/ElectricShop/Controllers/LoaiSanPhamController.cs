@@ -9,6 +9,7 @@ using ElectricShop.Models;
 
 namespace ElectricShop.Controllers
 {
+    
     public class LoaiSanPhamController : Controller
     {
         private readonly ElectricShopContext _context;
@@ -17,7 +18,7 @@ namespace ElectricShop.Controllers
         {
             _context = context;    
         }
-
+        
         // GET: LoaiSanPham
         public async Task<IActionResult> Index()
         {

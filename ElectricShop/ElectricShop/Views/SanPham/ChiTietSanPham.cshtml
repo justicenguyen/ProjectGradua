@@ -1,0 +1,297 @@
+﻿@model ElectricShop.Models.DuLieuChiTietSanPham
+@{
+    ViewData["Title"] = "Chi tiết sản phẩm";
+    Layout = "~/Views/Shared/_ClientLayout1.cshtml";
+}
+<div class="row margin-bottom-40 ">
+    <div class="sidebar col-md-3 col-sm-4">
+        @await Component.InvokeAsync("Siderbar_SPBCComponent")
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+
+
+
+        <div class="product-page">
+            <div class="row">
+                <div class="col-md-6 col-sm-6">
+                    <div class="product-main-image">
+                        <img src="/@Model.sanpham.HinhAnh" alt="Cool green dress with red bell" class="img-responsive" data-BigImgsrc="/@Model.sanpham.HinhAnh">
+                    </div>
+                    <div class="product-other-images">
+                        <a href="/@Model.sanpham.HinhAnh" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="/@Model.sanpham.HinhAnh"></a>
+                        <a href="/@Model.sanpham.HinhAnh" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="/@Model.sanpham.HinhAnh"></a>
+                        <a href="/@Model.sanpham.HinhAnh" class="fancybox-button" rel="photos-lib"><img alt="Berry Lace Dress" src="/@Model.sanpham.HinhAnh"></a>
+                    </div>
+                </div>
+                <div class="col-md-6 col-sm-6">
+                    <h1>@Model.sanpham.TenSPCoDau</h1>
+                    <div class="price-availability-block clearfix">
+                        <div class="price">
+                            <strong><span>$</span>@Model.sanpham.GiaGiam</strong>
+                            <em>$<span>62.00</span></em>
+                        </div>
+                        <div class="availability">
+                            Trạng thái: <strong>@(Model.sanpham.SoLuong > 0 ? "Còn" : "Hết") hàng</strong>
+                        </div>
+                    </div>
+                    <div class="product-page-cart">
+                        <div class="product-quantity">
+                            <input id="product-quantity" type="text" value="1" readonly class="form-control input-sm">
+                        </div>
+                        <button class="btn btn-primary" type="submit">Add to cart</button>
+                    </div>
+
+                    <ul class="social-icons">
+                        <li><a class="facebook" data-original-title="facebook" href="javascript:;"></a></li>
+                        <li><a class="twitter" data-original-title="twitter" href="javascript:;"></a></li>
+                        <li><a class="googleplus" data-original-title="googleplus" href="javascript:;"></a></li>
+                        <li><a class="evernote" data-original-title="evernote" href="javascript:;"></a></li>
+                        <li><a class="tumblr" data-original-title="tumblr" href="javascript:;"></a></li>
+                    </ul>
+                </div>
+                <div class="product-page-content">
+                    <ul id="myTab" class="nav nav-tabs">
+                        <li><a href="#Description" data-toggle="tab">Description</a></li>
+                        <li><a href="#Information" data-toggle="tab">Information</a></li>
+                        <li class="active"><a href="#Reviews" data-toggle="tab">Reviews (@Model.dsbinhluan.Count)</a></li>
+                    </ul>
+                    <div id="myTabContent" class="tab-content">
+                        <div class="tab-pane fade" id="Description">
+                            @Html.Raw(Model.sanpham.MoTa)
+                        </div>
+                        <div class="tab-pane fade" id="Information">
+                            <table class="datasheet">
+                                <tr>
+                                    <th colspan="2">Additional features</th>
+                                </tr>
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.TenSPCoDau))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Tên sản phẩm</td><td class="techSpecTD2"> @Model.sanpham.TenSPCoDau</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.MauSac))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Màu sắc</td><td class="techSpecTD2"> @Model.sanpham.MauSac</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.HangSanXuat))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Hãng sản xuất</td><td class="techSpecTD2"> @Model.HangSanXuat</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.XuatXu))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Xuất xứ</td><td class="techSpecTD2"> @Model.sanpham.XuatXu</td></tr>
+                                    }
+                                }
+                                @{ if (Model.sanpham.BaoHanh > 0)
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Bảo hành</td><td class="techSpecTD2">@Model.sanpham.BaoHanh tháng</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.KichThuocThung))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Kích thước thùng</td><td class="techSpecTD2"> @Model.sanpham.KichThuocThung</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.KhoiLuongThung))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Khối lượng thùng</td><td class="techSpecTD2"> @Model.sanpham.KhoiLuongThung</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.KichThuocMH))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Kích thước màn hình</td><td class="techSpecTD2"> @Model.sanpham.KichThuocMH</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.DoPhanGiai))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Độ phân giải màn hình</td><td class="techSpecTD2"> @Model.sanpham.DoPhanGiai</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.ManHinhCong))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Màn hình cong</td><td class="techSpecTD2"> @Model.sanpham.ManHinhCong</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.BoXuLy))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Bộ xử lý</td><td class="techSpecTD2"> @Model.sanpham.BoXuLy</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.SmartTV))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Smart TV</td><td class="techSpecTD2"> @Model.sanpham.SmartTV</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.TanSoQuet))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Tần số quét</td><td class="techSpecTD2"> @Model.sanpham.TanSoQuet</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.CongSuatLoa))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Công suất loa</td><td class="techSpecTD2"> @Model.sanpham.CongSuatLoa</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.CongWiFi))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Cổng Wifi</td><td class="techSpecTD2"> @Model.sanpham.CongWiFi</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.CongInternet))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Cổng Internet</td><td class="techSpecTD2"> @Model.sanpham.CongInternet</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.CongHDMI))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Cổng HDMI</td><td class="techSpecTD2"> @Model.sanpham.CongHDMI</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.CongUSB))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Cổng USB</td><td class="techSpecTD2"> @Model.sanpham.CongUSB</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.ChiaSeThongMinh))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Chia sẻ thông minh</td><td class="techSpecTD2"> @Model.sanpham.ChiaSeThongMinh</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.HeDeHanh))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Hệ điều hành</td><td class="techSpecTD2"> @Model.sanpham.HeDeHanh</td></tr>
+                                    }
+                                }
+                                @{ if (!String.IsNullOrEmpty(Model.sanpham.TrinhDuyetWeb))
+                                    {
+                                <tr class="techSpecRow"><td class="techSpecTD1">Trình duyệt Web</td><td class="techSpecTD2"> @Model.sanpham.TrinhDuyetWeb</td></tr>
+                                    }
+                                }
+                            </table>
+                        </div>
+                        <div class="tab-pane fade in active" id="Reviews" >
+                            <div id="binhluan" >
+                                @foreach (var bl in Model.dsbinhluan)
+                                {
+                                    <div class="review-item clearfix">
+                                        <div class="review-item-submitted">
+                                            <strong>@bl.HoTen</strong>
+                                            <em>@bl.ThoiGian</em>
+                                        </div>
+                                        <div class="review-item-content">
+                                            <p>@bl.NoiDung</p>
+                                        </div>
+                                    </div>
+
+                                }
+                            </div>
+                            <!--<p>There are no reviews for this product.</p>-->
+                            
+                            
+                            <!-- BEGIN FORM-->
+                            <form class="form">
+                                <h2>Viết bình luận</h2>
+                                <div class="form-group">
+                                    <label for="name">Tên<span class="require">*</span></label>
+                                    <input type="text" class="form-control" id="hoten" name="HoTen">
+                                    <span class="text-danger" style="color:red;" id="loihoten"></span>
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Email</label>
+                                    <input type="text" class="form-control" id="email" name="Email">
+                                </div>
+                                <div class="form-group">
+                                    <label for="email">Số điện thoại</label>
+                                    <input type="text" class="form-control" id="email" name="SoDienThoai">
+                                </div>
+                                <div class="form-group">
+                                    <label for="review">Nội dung bình luận<span class="require">*</span></label>
+                                    <textarea class="form-control" rows="8" id="noidung" name="NoiDung"></textarea>
+                                    <span class="text-danger" style="color:red;" id="loinoidung"></span>
+                                </div>
+                                <input type="hidden" name="MaSanPham" value="@Model.sanpham.ID" />
+                                <div class="padding-top-20">
+                                    <button type="button" id="gui" class="btn btn-primary">Gửi</button>
+                                </div>
+                            </form>
+                            <!-- END FORM-->
+                        </div>
+                    </div>
+                </div>
+                <div class="sticker sticker-sale"></div>
+            </div>
+        </div>
+
+
+        <br />
+        <h2>Các sản phẩm liên quan</h2>
+        <div class="row">
+            @foreach (var splq in Model.dssanphamlienquan)
+            {
+            <div class="col-md-3">
+                <div class="product-item">
+                    <div class="pi-img-wrapper">
+                        <img src="/@splq.HinhAnh" class="img-responsive" alt="Berry Lace Dress">
+                        <div>
+                            <a href="/@splq.HinhAnh" class="btn btn-default fancybox-button">Zoom</a>
+                            <a href="#product-pop-up" class="btn btn-default fancybox-fast-view">View</a>
+                        </div>
+                    </div>
+                    <h3><a href="shop-item.html">@splq.TenSPCoDau</a></h3>
+                    <div class="pi-price">@splq.GiaGiam</div>
+                    <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
+                    <div class="sticker sticker-new"></div>
+                </div>
+            </div>
+
+            }
+
+
+        </div>
+        <!-- END SIMILAR PRODUCTS -->
+    </div>
+</div>
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#gui').click(function () {
+            var flag = 1;
+            if (document.getElementById('hoten').value == "") {
+                $('#loihoten').text('Bạn chưa nhập họ tên!');
+                flag = 0;
+            }
+            else
+            {
+                $('#loihoten').hide();
+            }
+            if (document.getElementById('noidung').value == "") {
+                $('#loinoidung').text('Bạn chưa nhập nội dung bình luận !');
+                flag = 0;
+            }
+            else {
+
+                $('#loinoidung').hide();
+            }
+            if (flag == 1) {
+                $.ajax({
+                    url: '/SanPham/BinhLuan1',
+                    type: 'POST',
+                    data: $('.form').serialize(),
+                    success: function (c) {
+                        var s = document.getElementById('binhluan').innerHTML;
+                        s = c + s;
+                        $('#binhluan').html(s);
+                        $('#noidung').val('');
+                    }
+                });
+                $('#loihoten').hide();
+                $('#loinoidung').hide();
+            }
+
+        });
+    });
+</script>

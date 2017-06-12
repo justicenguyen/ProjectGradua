@@ -1,4 +1,4 @@
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -22,6 +22,28 @@ namespace ElectricShop.Controllers
         public async Task<IActionResult> Index()
         {
             return View(await _context.DonHang.ToListAsync());
+        }
+        public async Task<IActionResult> ChiTietDonHang(int? id)
+        {
+            var donHang = await _context.DonHang
+                .SingleOrDefaultAsync(m => m.ID == id);
+            var dsChiTiet = from ct in _context.ChiDietDonHang
+                            where ct.DonHangID == id
+                            select ct;
+            var dsMatHang = new List<MatHang>();
+            foreach(var ct in dsChiTiet)
+            {
+                var sanPham = await _context.SanPham.SingleOrDefaultAsync(sp => sp.ID == ct.SanPhamID);
+                var mh = new MatHang();
+                mh.sanPham = sanPham;
+                mh.soLuong = ct.SoLuong;
+                mh.tongTien = ct.TongTien;
+                dsMatHang.Add(mh);
+            }
+            var duLieuChiTiet = new DuLieuChiTietDonHang();
+            duLieuChiTiet.donHang = donHang;
+            duLieuChiTiet.chiTietDonHang = dsMatHang;
+            return View(duLieuChiTiet);
         }
 
         // GET: DonHang/Details/5
@@ -122,15 +144,50 @@ namespace ElectricShop.Controllers
             {
                 return NotFound();
             }
-
             var donHang = await _context.DonHang
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (donHang == null)
             {
                 return NotFound();
             }
+            var dsChiTiet = from ct in _context.ChiDietDonHang
+                            where ct.DonHangID == id
+                            select ct;
+            foreach(var mh in dsChiTiet )
+            {
+               // var matHang = await _context.ChiDietDonHang.SingleOrDefaultAsync(m => m.DonHangID == mh.DonHangID);
+                _context.ChiDietDonHang.Remove(mh);
+            }
+            _context.DonHang.Remove(donHang);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
+        }
 
-            return View(donHang);
+        public async Task<IActionResult> ThayDoiDaDuyet(int? idDH)
+        {
+            if (idDH == null)
+            {
+                return NotFound();
+            }
+            var donHang = await _context.DonHang
+                .SingleOrDefaultAsync(m => m.ID == idDH);
+            donHang.DaDuyet = !donHang.DaDuyet;
+            _context.Update(donHang);
+            await _context.SaveChangesAsync();
+            return Content("Thay đổi thành công");
+        }
+        public async Task<IActionResult> ThayDoiDaGiao(int? idDH)
+        {
+            if (idDH == null)
+            {
+                return NotFound();
+            }
+            var donHang = await _context.DonHang
+                .SingleOrDefaultAsync(m => m.ID == idDH);
+            donHang.DaGiao = !donHang.DaGiao;
+            _context.Update(donHang);
+            await _context.SaveChangesAsync();
+            return Content("Thay đổi thành công");
         }
 
         // POST: DonHang/Delete/5

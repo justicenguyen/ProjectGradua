@@ -53,7 +53,7 @@ namespace ElectricShop.Controllers
             var dsloaisanpham = from lsp in _context.LoaiSanPham
                                 select lsp;
             var dsidloaisanphamkhuyenmai = from sp in _context.SanPham
-                                           where sp.GiaGiam != sp.Gia
+                                           where sp.GiaGiam != sp.GiaGoc
                                          group sp by sp.LoaiSanPham;
             var dsloaisanphamkhuyenmai = from lsp in _context.LoaiSanPham
                                          join k in dsidloaisanphamkhuyenmai on lsp.ID equals k.Key
@@ -62,7 +62,7 @@ namespace ElectricShop.Controllers
             foreach(var lsp in dsloaisanphamkhuyenmai)
             {
                 var dssanphamkhuyenmai = from sp in _context.SanPham
-                                         where sp.GiaGiam != sp.Gia && sp.LoaiSanPham == lsp.ID
+                                         where sp.GiaGiam != sp.GiaGoc && sp.LoaiSanPham == lsp.ID
                                          select sp;
                 int soluong = dssanphamkhuyenmai.Count();
                 string xemthemhtml = "";
@@ -94,12 +94,12 @@ namespace ElectricShop.Controllers
                 foreach(var sp in dssanphamkhuyenmai.Skip(0).Take(3))
                 {
                     string giagiam = "";
-                    if(sp.Gia!=sp.GiaGiam)
+                    if(sp.GiaGoc!=sp.GiaGiam)
                     {
                         int? phantram;
-                        phantram = 100 - (int?)sp.GiaGiam * 100 / sp.Gia;
+                        phantram = 100 - (int?)sp.GiaGiam * 100 / sp.GiaGoc;
                         giagiam = giagiam + "<p>" +
-                                           " <h5> <span style = 'text-decoration:line-through' class='giagoc'> " + sp.Gia + " vnđ</span> &nbsp;<span style = 'background-color:red;color:white;' > " + phantram+" %</ span ></ h5 >" +
+                                           " <h5> <span style = 'text-decoration:line-through' class='giagoc'> " + sp.GiaGoc + " vnđ</span> &nbsp;<span style = 'background-color:red;color:white;' > " + phantram+" %</ span ></ h5 >" +
                                        "</p>";
                     }
                     result = result +
@@ -129,18 +129,18 @@ namespace ElectricShop.Controllers
         {
            
             var dssanpham = (from sp in _context.SanPham
-                             where sp.Gia != sp.GiaGiam && sp.LoaiSanPham == loaisp
+                             where sp.GiaGoc != sp.GiaGiam && sp.LoaiSanPham == loaisp
                             select sp).Skip(3);
             string result = "";
             foreach(var sp in dssanpham)
             {
                 string giagiam = "";
-                if (sp.Gia != sp.GiaGiam)
+                if (sp.GiaGoc != sp.GiaGiam)
                 {
                     int? phantram;
-                    phantram = 100 - (int?)sp.GiaGiam * 100 / sp.Gia;
+                    phantram = 100 - sp.GiaGiam * 100 / sp.GiaGoc;
                     giagiam = giagiam + "<p>" +
-                                       " <h5> <span style = 'text-decoration:line-through' class='giagoc'> " + sp.Gia + " vnđ</span> &nbsp;<span style = 'background-color:red;color:white;' > " + phantram + " %</ span ></ h5 >" +
+                                       " <h5> <span style = 'text-decoration:line-through' class='giagoc'> " + sp.GiaGoc + " vnđ</span> &nbsp;<span style = 'background-color:red;color:white;' > " + phantram + " %</ span ></ h5 >" +
                                    "</p>";
                 }
                 result = result +

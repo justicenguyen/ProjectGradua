@@ -4,67 +4,55 @@
     ViewData["Title"] = "Sản phẩm";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
+@section SanPhamIndex_Scripts{
+    <script src="~/frontend_admin/js/sanpham_index.js"></script>
+}
+<h2>Danh sách sản phẩm</h2>
 
-<h2>Index</h2>
+<a class="btn btn-success btn-xs" asp-action="Create"><i class="fa fa-plus-circle"></i> Thêm mới</a>
+@{ int num = 1;}
+@foreach (var sp in Model)
+{
+    @if (num == 1)
+    {
+        @:<div class="row">
+            @:<div class="col-md-12">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<div class="row">
-    <div class="col-md-12">
-        @foreach (var sp in Model)
-        {
+
+    }
     <!--San pham-->
-            <div class="col-md-55" style="min-height:1px;">
-                <div class="thumbnail">
-                    <div class="image view view-first" style="min-height:1px;">
-                        <img style="width: 100%; display: block;" src="/@sp.HinhAnh" alt="image" />
-                    </div>
-                    <div class="caption">
-                        <h5><b>@sp.TenSPCoDau</b></h5>
-                        <p><b>Giá gốc : @sp.Gia vnd</b></p>
-                        <p><b>Giá KM : @sp.GiaGiam vnd </b></p>
-                        <p><b>Số lượng : @sp.SoLuong </b></p>
-                        <div class="checkbox">
-                            <label>
-                                @{ if (sp.HienThi == true)
-                                    {
-                                        @:<input type="checkbox" style="width:20px;height:20px;" class="flat" checked="checked"> <span style="margin-top:5px;"><b>&nbsp;Hiển thị trang chủ</b></span>
-                                    }
-                                    else
-                                    {
-                                       @: <input type="checkbox" style="width:20px;height:20px;" class="flat"> <span style="margin-top:5px;"><b>&nbsp;Hiển thị trang chủ</b></span>
-                                    }
-
-
-                                }
-                                </label>
-                        </div>
-                        <div class="checkbox">
-                            <label>
-                                @{ if (sp.SanPhamBanChay == true)
-                                    {
-                                        @:<input type="checkbox" style="width:20px;height:20px;" class="flat" checked="checked"> <span style="margin-top:5px;"><b>&nbsp;Sản phẩm bán chạy</b></span>
-                                    }
-                                    else
-                                    {
-                                        @: <input type="checkbox" style="width:20px;height:20px;" class="flat"> <span style="margin-top:5px;"><b>&nbsp;Sản phẩm bán chạy</b></span>
-                                    }
-                                    
-                                }
-                            </label>
-                        </div>
-                        <a href="#" class="btn btn-info btn-sm"><i class="fa fa-pencil"></i> Sửa </a>
-                        <a href="#" class="btn btn-danger btn-sm"><i class="fa fa-trash-o"></i> Xóa</a>
-                    </div>
-                </div>
+    <div class="col-md-55" style="min-height:1px;">
+        <div class="thumbnail">
+            <div class="image view view-first" style="min-height:1px;">
+                <img style="width: 100%; display: block;" src="/@sp.HinhAnh" alt="image" />
             </div>
-    <!--End San Pham-->
-        }
+            <div class="caption">
+                <h5><b>@sp.TenSPCoDau</b></h5>
+                <p><b>Giá gốc : @Html.DisplayFor(modelItem => sp.GiaGoc) vnd</b></p>
+                <p><b>Giá KM : @Html.DisplayFor(modelItem => sp.GiaGiam) vnd </b></p>
+                <p><b>Số lượng : @sp.SoLuong </b></p>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" style="width:20px;height:20px;" class="hienthi" data-idsp="@sp.ID"  @(sp.HienThi ? "checked=checked":"" )> <span style="margin-top:5px;"><b>&nbsp;Hiển thị trang chủ</b></span>
+                    </label>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" style="width:20px;height:20px;" class="spbanchay" data-idsp="@sp.ID"  @(sp.SanPhamBanChay ? "checked=checked":"" )> <span style="margin-top:5px;"><b>&nbsp;Sản phẩm bán chạy</b></span>
+                    </label>
+                </div>
+                <a  class="btn btn-info btn-sm" asp-action="Edit" asp-route-id="@sp.ID"><i class="fa fa-pencil"></i> Sửa </a>
+                <a  class="btn btn-danger btn-sm"  asp-action="Delete" onclick="return confirm('Bạn có chắc chắn xóa không ?')"asp-route-id="@sp.ID" ><i class="fa fa-trash-o"></i> Xóa</a>
+            </div>
+        </div>
     </div>
-</div>
-@*<div class="row">*@
+    <!--End San Pham-->
+      @if (num == 5)
+      {
+           @:</div>
+           @:</div>
+           num = 1;
+       }
+       else { num++; }
+   }
 
-    
-    
-@*</div>*@

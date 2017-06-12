@@ -13,7 +13,6 @@
 
     if (!isValidFile) {
         alert('Các file hình cho phép có dạng : *.' + allowedExtension.join(', *.'));
-        $('#files').attr("value", "aaaaaaaaaaa");
         document.getElementById("img").src = '';
         document.getElementById("files").value = '';
         

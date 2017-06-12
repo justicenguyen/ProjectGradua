@@ -19,13 +19,16 @@ namespace ElectricShop.Models
         [Required(ErrorMessage = "Bạn chưa nhập tên sản phẩm có không dấu !")]
         public string TenSPKhongDau { get; set; }
         [DisplayName("Giá gốc *")]
-        [Required(ErrorMessage = "Bạn chưa nhập giá sản phẩm !")]
+        [Range(0, int.MaxValue, ErrorMessage = "Giá gốc sản phẩm không hợp lệ")]
+        [Required(ErrorMessage = "Bạn chưa nhập giá gốc sản phẩm !")]
         [DisplayFormat(DataFormatString = "{0:0,0}")]
-        public int? Gia { get; set; }
-        [Required(ErrorMessage = "Bạn chưa nhập giá giảm phẩm !")]
+        public int GiaGoc { get; set; }
         [DisplayName("Giá khuyến mãi *")]
         [DisplayFormat(DataFormatString = "{0:0,0}")]
         public int GiaGiam { get; set; }
+        [DisplayName("Giá Bán")]
+        [DisplayFormat(DataFormatString = "{0:0,0}")]
+        public int GiaBan { get; set; }
         [DisplayName("Hình đại diện* ")]
         [Required(ErrorMessage = "Bạn chưa chọn ảnh đại diện cho sản phẩm !")]
         public string HinhAnh { get; set;}
@@ -56,7 +59,7 @@ namespace ElectricShop.Models
         // TIVI
         [DisplayName("Kích thước màn hình")]
         public string KichThuocMH { get; set; }
-        [DisplayName("GiĐộ phân giải")]
+        [DisplayName("Độ phân giải")]
         public string DoPhanGiai { get; set; }
         [DisplayName("màn hình cong")]
         public string ManHinhCong { get; set; }

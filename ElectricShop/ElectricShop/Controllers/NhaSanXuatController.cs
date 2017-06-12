@@ -122,15 +122,15 @@ namespace ElectricShop.Controllers
             {
                 return NotFound();
             }
-
             var nhaSanXuat = await _context.NhaSanXuat
                 .SingleOrDefaultAsync(m => m.ID == id);
             if (nhaSanXuat == null)
             {
                 return NotFound();
             }
-
-            return View(nhaSanXuat);
+            _context.NhaSanXuat.Remove(nhaSanXuat);
+            await _context.SaveChangesAsync();
+            return RedirectToAction("Index");
         }
 
         // POST: NhaSanXuats/Delete/5

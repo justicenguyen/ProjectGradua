@@ -59,7 +59,7 @@ namespace ElectricShop
                 app.UseExceptionHandler("/Home/Error");
             }
             app.UseStaticFiles();
-
+            //app.UseMvc();
             app.UseMvc(routes =>
             {
                 routes.MapRoute(

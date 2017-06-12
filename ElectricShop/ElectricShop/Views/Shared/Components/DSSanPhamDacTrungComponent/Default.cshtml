@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ElectricShop.Models.SanPham>
+<!-- BEGIN CONTENT  danh sách sản phẩm-->
+    <h2>Các sản phẩm đặc trưng của cửa hàng</h2>
+    <div class="row" style="margin-top:20px;">
+        @foreach (var spdt in Model)
+        {
+            <div class="col-md-3">
+                <div class="product-item">
+                    <div class="pi-img-wrapper">
+                        <img src="/@spdt.HinhAnh" class="img-responsive" alt="Berry Lace Dress">
+                        <div>
+                            <a href="/@spdt.HinhAnh" class="btn btn-default fancybox-button">Zoom</a>
+                            <a asp-controller="SanPham" asp-action="ChiTietSanPham" asp-route-id="@spdt.TenSPKhongDau" class="btn btn-default fancybox-fast-view">View</a>
+                        </div>
+                    </div>
+                    <h3><a href="shop-item.html">@spdt.TenSPCoDau</a></h3>
+                    <div class="pi-price">@Html.DisplayFor(modelItem => spdt.GiaBan) vnd</div>
+                    <div style="clear:both;">
+                        @{
+                            if (spdt.GiaGiam != 0)
+                            {
+                                @: <span style="text-decoration:line-through;">@Html.DisplayFor(modelItem => spdt.GiaGoc) vnd</span>&nbsp;<span style="background-color:red;">-@(spdt.GiaGiam * 100 / spdt.GiaGoc) %</span>
+                                <div class="sticker sticker-sale"></div>
+                            }
+                        }
+                        &nbsp;
+                    </div>
+                    <div style="margin-top:5px;"><a onclick="themgiohang(@spdt.ID)" class="btn btn-default add2cart">Add to cart</a></div>
+                    
+                </div>
+            </div>
+
+        }
+    </div>
+
+
+
+
+
+<!-- END CONTENT  danh sách sản phẩm-->

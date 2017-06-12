@@ -1,0 +1,149 @@
+﻿@model ElectricShop.Models.DuLieuDanhSachSanPhamKhuyenMai
+@{
+    ViewData["Title"] = "Danh sách sản phẩm theo loại";
+    Layout = "~/Views/Shared/_ClientLayout1.cshtml";
+}
+<div class="row margin-bottom-40 ">
+    <div class="sidebar col-md-3 col-sm-4">
+        @await Component.InvokeAsync("Siderbar_SPBCComponent")
+    </div>
+    <!--Danh sach sản phẩm-->
+    <div class="col-md-9 col-sm-8">
+
+        <form asp-controller="SanPham" asp-action="DanhSachSanPhamTimKiem1" method="get">
+            <input type="hidden" name="tukhoa" value="@ViewData["tukhoa"]" />
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Chọn loại sản phẩm</label>
+                            <select class="form-control" name="loai" onchange="this.form.submit();">
+                                <option value="">---Tất cả---</option>
+                                @foreach (var lsp in Model.dsloaisanpham)
+                                {
+                                    if (ViewData["loai"].Equals(lsp.TenLoaiSPKhongDau))
+                                    {
+                                        <option value="@lsp.TenLoaiSPKhongDau" selected="selected">@lsp.TenLoaiSPCoDau</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@lsp.TenLoaiSPKhongDau">@lsp.TenLoaiSPCoDau</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Chọn nhà sản xuất</label>
+                            <select class="form-control" name="hang" onchange="this.form.submit();">
+                                <option value="">---Tất cả---</option>
+                                @foreach (var nsx in Model.dsnhasanxuat)
+                                {
+                                    if (ViewData["hang"].Equals(nsx.TenNSXKhongDau))
+                                    {
+                                        <option value="@nsx.TenNSXKhongDau" selected="selected">@nsx.TenNSXCoDau</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@nsx.TenNSXKhongDau">@nsx.TenNSXCoDau</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <div class="form-group">
+                            <label>Chọn mức giá</label>
+                            <select class="form-control" name="gia" onchange="this.form.submit();">
+                                <option value="">---Tất cả---</option>
+                                @{
+                                    if (ViewData["gia"].Equals("duoi-5-trieu"))
+                                    {
+                                        <option value="duoi-5-trieu" selected="selected">Dưới 5 triệu</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="duoi-5-trieu">Dưới 5 triệu</option>
+                                    }
+                                }
+                                @{
+                                    if (ViewData["gia"].Equals("tu-5-7-trieu"))
+                                    {
+                                        <option value="tu-5-7-trieu" selected="selected">Từ 5 đến 7 triệu</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="tu-5-7-trieu">Từ 5 đến 7 triệu</option>
+
+                                    }
+                                }
+                                @{
+                                    if (ViewData["gia"].Equals("tu-7-10-trieu"))
+                                    {
+                                        <option value="tu-7-10-trieu">Từ 5 đến 7 triệu</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="tu-7-10-trieu">Từ 5 đến 7 triệu</option>
+
+                                    }
+                                }
+                                @{
+                                    if (ViewData["gia"].Equals("tren-10-trieu"))
+                                    {
+                                        <option value="tren-10-trieu">Từ 5 đến 7 triệu</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="tren-10-trieu">Từ 5 đến 7 triệu</option>
+
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+
+            </div>
+        </form>
+        <h2>Danh sách sản phẩm Tìm kiếm cho từ khóa "@ViewData["tukhoa"]"</h2>
+        <div class="row" style="margin-top:20px;">
+            @foreach (var sp in Model.dssanphamkhuyenmai)
+            {
+                <div class="col-md-3">
+                    <div class="product-item">
+                        <div class="pi-img-wrapper">
+                            <img src="/@sp.HinhAnh" class="img-responsive" alt="Berry Lace Dress">
+                            <div>
+                                <a href="/@sp.HinhAnh" class="btn btn-default fancybox-button">Zoom</a>
+                                <a asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@sp.TenSPKhongDau" class="btn btn-default fancybox-fast-view">View</a>
+                            </div>
+                        </div>
+                        <h3><a href="shop-item.html">@sp.TenSPCoDau</a></h3>
+                        <div class="pi-price">@Html.DisplayFor(modelItem => sp.GiaBan) vnd </div>
+                        <div style="clear:both;">
+                            @{
+                                if (sp.GiaGiam != 0)
+                                {
+                                    @: <span style="text-decoration:line-through;">@Html.DisplayFor(modelItem => sp.GiaGoc) vnd</span>&nbsp;<span style="background-color:red;">-@(sp.GiaGiam * 100 / sp.GiaGoc) %</span>
+                                    <div class="sticker sticker-sale"></div>
+                                }
+                            }
+                            &nbsp;
+                        </div>
+                        <div style="margin-top:5px;"><a href="https://www.w3schools.com/bootstrap/bootstrap_grid_system.asp" class="btn btn-default add2cart">Add to cart</a></div>
+
+                    </div>
+                </div>
+                                }
+        </div>
+    </div>
+</div>

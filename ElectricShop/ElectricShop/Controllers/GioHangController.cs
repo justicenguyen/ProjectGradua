@@ -34,7 +34,23 @@ namespace ElectricShop.Controllers
             }
             return View(list);
         }
-        
+
+        public IActionResult GioHang1()
+        {
+
+            var cart = HttpContext.Session.GetSession<List<SanPhamGioHang>>(GioHangSession);
+            if (cart == null)
+            {
+                cart = HttpContext.Request.Cookies.GetKookies<List<SanPhamGioHang>>(GioHangSession);
+            }
+            var list = new List<SanPhamGioHang>();
+            if (cart != null)
+            {
+                list = (List<SanPhamGioHang>)cart;
+            }
+            return View(list);
+        }
+
         public async Task<IActionResult> ThemGioHang(int idSP, int soLuong)
         {
 

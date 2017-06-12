@@ -71,22 +71,6 @@
 <ul class="thumbnails">
     @foreach (var spht in Model.dssanphamtheoloai)
     {
-        @*<li class="span3">
-            <div class="thumbnail">
-                <a asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@spht.TenSPKhongDau"><img src="~/@spht.HinhAnh" alt="" /></a>
-                <div class="caption">
-                    <h5 style="color:red;text-align:center;">@spht.TenSPCoDau</h5>
-                    <p>
-                        <h5>@spht.Gia đồng</h5>
-                    </p>
-
-                    <h4 style="text-align:center"><a class="btn" href="product_details.html"> <i class="icon-zoom-in"></i></a> <a class="btn" href="#">Add to <i class="icon-shopping-cart"></i></a> </h4>
-                </div>
-            </div>
-        </li>*@
-
-
-
         <li class="span3">
             <div class="thumbnail">
                 <a asp-controller="SanPham" asp-action="ChiTiet" asp-route-id="@spht.TenSPKhongDau"><img src="~/@spht.HinhAnh" alt="" /></a>

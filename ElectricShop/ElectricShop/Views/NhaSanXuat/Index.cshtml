@@ -1,41 +1,39 @@
-@model IEnumerable<ElectricShop.Models.NhaSanXuat>
+﻿@model IEnumerable<ElectricShop.Models.NhaSanXuat>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Nhà sản xuất";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h2>Index</h2>
+<h2>Nhà sản xuất</h2>
+<a class="btn btn-success btn-xs" asp-action="Create"><i class="fa fa-plus-circle"></i> Thêm mới</a>
+<div class="row">
+    <div class="col-sm-7">
+        <table class="table table-striped jambo_table bulk_action">
+            <thead>
+                <tr class="headings">
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-                <th>
-                    @Html.DisplayNameFor(model => model.TenNSXCoDau)
-                </th>
-                <th>
-                    @Html.DisplayNameFor(model => model.TenNSXKhongDau)
-                </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenNSXCoDau)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.TenNSXKhongDau)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                    <th width="10%">ID </th>
+                    <th width="35%">Tên nhà sản xuất có dấu </th>
+                    <th width="35%">Tên nhà sản xuất không dấu </th>
+                    <th width="10%"> Sửa</th>
+                    <th width="10%"> Xóa</th>
+
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var nsx in Model)
+                {
+                    <tr class="even pointer">
+                        <td class=" ">@nsx.ID</td>
+                        <td class=" ">@nsx.TenNSXCoDau</td>
+                        <td class=" ">@nsx.TenNSXKhongDau</td>
+                        <td class=""><a class="btn btn-primary btn-xs" asp-action="Edit" asp-route-id="@nsx.ID"><i class="fa fa-edit"></i>Sửa</a></td>
+                        <td class=""><a class="btn btn-danger btn-xs" asp-action="Delete" onclick="return confirm('Bạn có chắc chắn xóa không ?')" asp-route-id="@nsx.ID"><i class="fa fa-trash-o"></i> Xóa</a></td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

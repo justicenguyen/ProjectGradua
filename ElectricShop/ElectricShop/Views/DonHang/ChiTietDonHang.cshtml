@@ -1,0 +1,103 @@
+﻿@model ElectricShop.Models.DuLieuChiTietDonHang
+@{
+    ViewData["Title"] = "Chi tiết đơn hàng";
+    Layout = "~/Views/Shared/_AdminLayout.cshtml";
+}
+<h2>Chi tiết đơn hàng</h2>
+<div class="thongtinkh">
+    <div class="row">
+        <div class="col-md-2">
+            <label>Họ tên khách hàng</label>
+        </div>
+        <div class="col-md-9">
+            <label>@Model.donHang.TenKhachHang</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Số điện thoại</label>
+        </div>
+        <div class="col-md-9">
+            <label>@Model.donHang.SoDienThoai</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Email</label>
+        </div>
+        <div class="col-md-9">
+            <label>@Model.donHang.Email</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Địa chỉ Ship</label>
+        </div>
+        <div class="col-md-9">
+            <label>@Model.donHang.DiaChi</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Tổng tiền</label>
+        </div>
+        <div class="col-md-9">
+            <label>@Model.donHang.TongTien</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Đã duyệt</label>
+        </div>
+        <div class="col-md-9">
+            <label>@(Model.donHang.DaDuyet?"Đã duyệt":"Chưa duyệt")</label>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2">
+            <label>Đã giao</label>
+        </div>
+        <div class="col-md-9">
+            <label>@(Model.donHang.DaGiao?"Đã giao":"Chưa giao")</label>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-8">
+        <table class="table table-striped jambo_table bulk_action">
+            <thead>
+                <tr class="headings">
+                    <th width="40%">Tên sản phẩm</th>
+                    <th width="20%">Giá</th>
+                    <th width="10%">Số lượng</th>
+                    <th width="20%">Tổng tiền</th>
+
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var mh in Model.chiTietDonHang)
+            {
+                    <tr class="mathang">
+                        <td class="">@mh.sanPham.TenSPCoDau</td>
+                        <td class=""> @Html.DisplayFor(modelItem => mh.sanPham.GiaGiam) vnd</td>
+                        <td class="">@mh.soLuong</td>
+                        <td class=""> @Html.DisplayFor(modelItem => mh.tongTien) vnd</td>
+                    </tr>
+                }
+
+            </tbody>
+        </table>
+        <div class="row">
+            <div class="col-md-9">
+                <div class="pull-right"><label>Tổng tiền :</label></div>
+
+            </div>
+            <div class="col-md-3">
+                <div class="pull-right">
+                    <label> @Html.DisplayFor(modelItem => Model.donHang.TongTien) vnd</label>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

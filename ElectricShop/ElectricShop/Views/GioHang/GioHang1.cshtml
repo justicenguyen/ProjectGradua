@@ -1,0 +1,98 @@
+﻿@model List<ElectricShop.Models.SanPhamGioHang>
+@{
+    ViewData["Title"] = "Trang chủ";
+    Layout = "~/Views/Shared/_ClientLayout1.cshtml";
+}
+<div class="row margin-bottom-40 ">
+    <div class="sidebar col-md-3 col-sm-4">
+        @await Component.InvokeAsync("Siderbar_SPBCComponent")
+    </div>
+
+    <div class="col-md-9 col-sm-8">
+     
+        <!-- BEGIN SIDEBAR & CONTENT -->
+        <div class="row margin-bottom-40">
+            <!-- BEGIN CONTENT -->
+            <div class="col-md-12 col-sm-12">
+                <h1>Shopping cart</h1>
+                <div class="goods-page">
+                    <div class="goods-data clearfix">
+                        <div class="table-wrapper-responsive">
+                            <table summary="Shopping cart">
+                                <tr>
+                                    <th class="goods-page-image">Hình ảnh</th>
+                                    <th class="goods-page-description">Tên sản phẩm</th>
+                                    <th class="goods-page-price">Giá bán</th>
+                                    <th class="goods-page-quantity">Số lượng</th>
+                                    <th class="goods-page-total" colspan="2">Tổng tiền</th>
+                                </tr>
+                                @foreach (var spgh in Model)
+                                {
+                                    <tr id="spgh_@spgh.idSP">
+                                        <td class="goods-page-image">
+                                            <a href="javascript:;"><img src="/@spgh.HinhAnh" alt="Berry Lace Dress"></a>
+                                        </td>
+                                        <td class="goods-page-description">
+                                            <h3><a href="javascript:;">@spgh.TenSP</a></h3>
+                                        </td>
+                                        <td class="goods-page-price">
+                                            <strong>@Html.DisplayFor(modelItem => spgh.Gia)</strong>
+                                        </td>
+                                        <td class="goods-page-quantity">
+                                            <div class="product-quantity">
+                                                <input id="sl_@spgh.idSP" onchange="tongtien(@spgh.idSP,@spgh.Gia,@spgh.SoLuong);" type="text" value="@spgh.SoLuong"  class="form-control input-sm">
+                                            </div>
+                                        </td>
+                                        <td class="goods-page-price">
+                                            <strong><span id="tongtien_@spgh.idSP">@Html.DisplayFor(modelItem => spgh.TongTien)</span></strong>
+                                        </td>
+                                        <td class="del-goods-col">
+                                            <a class="del-goods" href="javascript:;">&nbsp;</a>
+                                        </td>
+                                    </tr>
+                                }
+                            </table>
+                        </div>
+                        
+                    </div>
+                    <a class="btn btn-default"  asp-controller="TrangChu" asp-action="Index" >Continue shopping <i class="fa fa-shopping-cart"></i></a>
+                    <button class="btn btn-primary" type="submit">Checkout <i class="fa fa-check"></i></button>
+                </div>
+            </div>
+            <!-- END CONTENT -->
+        </div>
+        <!-- END SIDEBAR & CONTENT -->
+
+    </div>
+</div>
+<script>
+        function xoaSP(id) {
+            $(document).ready(function () {
+                $.ajax({
+                    url: '/Giohang/XoaGioHang',
+                    type: 'GET',
+                    data: { "idSP": id },
+                    success: function (c) {
+                        $('#spgh_'+id).remove();
+                    }
+
+                });
+            });
+    }
+
+    // Tinh tong tien cac san pham trong gio hang
+        function tongtien(id, gia, soluongcu) {
+            var slmoi = $('#sl_' + id).val();
+            $(document).ready(function () {
+                $.ajax({
+                    url: '/Giohang/SuaGioHang',
+                    type: 'GET',
+                    data: { "idSP": id, "soLuong": slmoi - soluongcu },
+                    success: function (c) {
+                        $('#tongtien_' + id).html($('#sl_' + id).val() * gia);
+                    }
+
+                });
+            });
+        }
+</script>

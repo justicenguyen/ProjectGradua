@@ -16,7 +16,7 @@ namespace ElectricShop.Controllers
         {
             _context = context;
         }
-        public IActionResult VD()
+        public IActionResult Index()
         {
             return View();
         }
